@@ -1,2 +1,2 @@
-# CloseDota2Nixsuki
+# CloseDota2Nixsuki.com
 CloseDota2Nixsuki.com
