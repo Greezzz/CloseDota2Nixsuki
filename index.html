@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dota 2 Event</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dota 2 Event</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Registration</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password">
+            <br>
+            <label for="rating">Dota Rating:</label>
+            <input type="text" id="rating" placeholder="Enter your Dota rating">
+            <br>
+            <button onclick="register()">Register</button>
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div class="container">
+            <h2>Players List</h2>
+            <ul id="players-list"></ul>
+            <button onclick="clearPlayersList()">Clear Players List</button>
+        </div>
+
+        <div class="container">
+            <h2>Teams</h2>
+            <div id="team1"></div>
+            <div id="team2"></div>
+            <button onclick="divideIntoTeams()">Divide into Teams</button>
+            <button onclick="clearTeams()">Clear Teams</button>
+        </div>
+
+        <div class="container">
+            <h2>Event Management</h2>
+            <button onclick="kickPlayer()">Kick Player</button>
+            <button onclick="inputRating()">Input Rating</button>
+            <button onclick="endEvent()">End Event</button>
+            <button onclick="assignCloserMaker()">Assign Closer Maker</button>
+            <button onclick="removeCloserMaker()">Remove Closer Maker</button>
+            <button onclick="clearEvent()">Clear Event</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
