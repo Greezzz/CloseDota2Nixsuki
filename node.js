@@ -1,48 +1,50 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const PORT = 3000;
+const http = require('http');
+const socketIO = require('socket.io');
 
-// Массивы для хранения пользователей и клозов
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+// Массивы для хранения данных
 let users = [];
 let events = [];
 
-// Middleware для обработки данных JSON
-app.use(bodyParser.json());
+// Middleware для обработки POST запросов
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Создание клоза
-app.post('/create-event', (req, res) => {
-    const eventName = req.body.name;
-    if (!eventName) {
-        return res.status(400).json({ error: 'Event name is required' });
-    }
-
-    // Здесь может быть ваша логика создания клоза
-    // Например, балансировка команд и выбор ролей
-
-    const newEvent = { name: eventName, date: new Date().toLocaleString() };
-    events.push(newEvent);
-
-    res.status(201).json({ message: 'Event created successfully', event: newEvent });
-});
-
-// Регистрация пользователя
+// Обработчик регистрации пользователей
 app.post('/register', (req, res) => {
-    const { username, rating, role } = req.body;
-    if (!username || !rating || !role) {
-        return res.status(400).json({ error: 'Username, rating, and role are required' });
-    }
-
-    // Здесь может быть ваша логика регистрации пользователя в клоз
-    // Например, добавление пользователя в соответствующую команду клоза
-
-    const newUser = { username, rating, role };
-    users.push(newUser);
-
-    res.status(201).json({ message: 'User registered successfully', user: newUser });
+    const { username, rating } = req.body;
+    
+    // Добавление пользователя в массив
+    users.push({ username, rating });
+    
+    // Отправка обновленного списка онлайн пользователей всем клиентам
+    io.emit('updateOnlineUsers', users);
+    
+    res.status(200).send('User registered successfully');
 });
 
-app.listen(PORT, () => {
+// Обработчик создания ивента
+app.post('/create-event', (req, res) => {
+    const { eventName } = req.body;
+    
+    // Создание нового ивента и добавление его в массив
+    events.push({ name: eventName, participants: [] });
+    
+    res.status(200).send('Event created successfully');
+});
+
+// Подключение к сокету при запуске сервера
+io.on('connection', socket => {
+    // Отправка обновленного списка онлайн пользователей новому клиенту
+    socket.emit('updateOnlineUsers', users);
+});
+
+// Прослушивание порта
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
