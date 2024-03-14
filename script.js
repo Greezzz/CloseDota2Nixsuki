@@ -117,3 +117,4 @@ function clearEvent() {
     playersRef.remove();
     eventsRef.remove();
 }
+
