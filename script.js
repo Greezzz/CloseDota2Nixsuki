@@ -10,42 +10,29 @@ function register() {
     }
 
     const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
     const ratingInput = document.getElementById('rating');
     const username = usernameInput.value.trim();
-    const password = passwordInput.value;
     const rating = parseInt(ratingInput.value.trim());
     
-    if (username !== '' && password !== '' && !isNaN(rating)) {
-        players.push({name: username, password: password, rating: rating});
+    if (username !== '' && !isNaN(rating)) {
+        players.push({name: username, rating: rating});
         updatePlayersList();
-        saveUser(username, password);
         usernameInput.value = '';
-        passwordInput.value = '';
         ratingInput.value = '';
     } else {
-        alert('Please enter valid username, password, and rating.');
+        alert('Please enter valid username and rating.');
     }
 }
 
-function saveUser(username, password) {
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
-}
-
 function login() {
-    const storedUsername = localStorage.getItem('username');
-    const storedPassword = localStorage.getItem('password');
     const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
     const username = usernameInput.value.trim();
-    const password = passwordInput.value;
 
-    if (username === storedUsername && password === storedPassword) {
+    if (username !== '') {
         loggedInUser = username;
-        alert('Logged in successfully.');
+        alert('Logged in successfully as ' + loggedInUser + '.');
     } else {
-        alert('Invalid username or password.');
+        alert('Please enter a valid username.');
     }
 }
 
@@ -147,7 +134,6 @@ function removeCloserMaker() {
 function clearPlayersList() {
     players = [];
     updatePlayersList();
-    clearLocalStorage();
 }
 
 function clearTeams() {
@@ -165,7 +151,3 @@ function clearEvent() {
     clearTeams();
 }
 
-function clearLocalStorage() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('password');
-}
