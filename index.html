@@ -1,51 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dota 2 Event Registration</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Орел или Решка Казино</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Dota 2 Event Registration</h1>
-        <form id="registration-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" required>
-            <br>
-            <label for="rating">Dota Rating:</label>
-            <input type="number" id="rating" required>
-            <br>
-            <label for="role">Role:</label>
-            <select id="role" required>
-                <option value="">Select role</option>
-                <option value="carry">Carry</option>
-                <option value="mid">Mid</option>
-                <option value="offlane">Offlane</option>
-                <option value="support">Support</option>
-                <option value="full-support">Full Support</option>
-            </select>
-            <br>
-            <button type="submit">Register</button>
-        </form>
-        <hr>
-        <h2>Event</h2>
-        <button id="start-event-btn">Start Event</button>
-        <button id="kick-btn">Kick Player</button>
-        <button id="clear-btn">Clear Event</button>
-        <table id="players-table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Role</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            <tbody id="players-list"></tbody>
-        </table>
+<div class="container">
+    <h1>Орел или Решка Казино</h1>
+    <div class="game">
+        <label for="bet">Ставка:</label>
+        <input type="number" id="bet" min="1" value="1">
+        <br>
+        <label for="choice">Выберите:</label>
+        <select id="choice">
+            <option value="heads">Орел</option>
+            <option value="tails">Решка</option>
+        </select>
+        <br>
+        <button onclick="play()">Играть</button>
+        <p id="result"></p>
     </div>
-
-    <script src="script.js"></script>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
 
