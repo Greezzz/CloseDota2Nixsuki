@@ -100,9 +100,15 @@ function createEvent() {
     const eventName = eventNameInput.value.trim();
     
     if (eventName !== '') {
-        // Здесь вы можете добавить логику создания клоза с балансировкой команд и выбором роли
-        // Для примера, добавим событие в базу данных
-        eventsRef.push({name: eventName, date: new Date().toLocaleString()});
+        // Создание ивента
+        const eventId = eventsRef.push({name: eventName, date: new Date().toLocaleString()}).key;
+        
+        // Создание таблицы для регистрации 10 человек
+        const registrationTable = database.ref(`events/${eventId}/registration`);
+        for (let i = 1; i <= 10; i++) {
+            registrationTable.push({name: '', rating: '', role: ''});
+        }
+        
         closeModal();
     } else {
         alert('Please enter a valid event name.');
