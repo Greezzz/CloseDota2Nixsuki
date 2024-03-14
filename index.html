@@ -14,13 +14,7 @@
     <main>
         <div class="container">
             <h2>Registration</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter your username">
-            <br>
-            <label for="rating">Dota Rating:</label>
-            <input type="text" id="rating" placeholder="Enter your Dota rating">
-            <br>
-            <button onclick="register()">Register</button>
+            <button onclick="openRegisterModal()">Register</button>
             <button onclick="login()">Login</button>
         </div>
 
@@ -53,14 +47,28 @@
         </div>
     </main>
 
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Registration</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+            <br>
+            <label for="rating">Dota Rating:</label>
+            <input type="text" id="rating" placeholder="Enter your Dota rating">
+            <br>
+            <button onclick="registerUser()">Register</button>
+        </div>
+    </div>
+
     <div id="create-event-modal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeCreateEventModal()">&times;</span>
             <h2>Create Event</h2>
             <label for="event-name">Event Name:</label>
             <input type="text" id="event-name" placeholder="Enter event name">
             <br>
-            <button onclick="createEvent()">Create</button>
+            <button onclick="createEvent()">Create Event</button>
         </div>
     </div>
 
@@ -69,6 +77,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
