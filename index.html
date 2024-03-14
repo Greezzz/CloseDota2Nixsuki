@@ -49,15 +49,27 @@
                 </thead>
                 <tbody id="events-list"></tbody>
             </table>
-            <button onclick="createEvent()">Create Event</button>
+            <button onclick="createEventModal()">Create Event</button>
         </div>
     </main>
+
+    <div id="create-event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create Event</h2>
+            <label for="event-name">Event Name:</label>
+            <input type="text" id="event-name" placeholder="Enter event name">
+            <br>
+            <button onclick="createEvent()">Create</button>
+        </div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
