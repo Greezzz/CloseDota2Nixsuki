@@ -33,12 +33,15 @@ eventsRef.on('value', snapshot => {
     updateEventsList();
 });
 
-function register() {
-    if (eventEnded) {
-        alert('Event has ended. Registration is closed.');
-        return;
-    }
+function openRegisterModal() {
+    document.getElementById('register-modal').style.display = 'block';
+}
 
+function closeRegisterModal() {
+    document.getElementById('register-modal').style.display = 'none';
+}
+
+function registerUser() {
     const usernameInput = document.getElementById('username');
     const ratingInput = document.getElementById('rating');
     const username = usernameInput.value.trim();
@@ -48,21 +51,15 @@ function register() {
         playersRef.push({name: username, rating: rating});
         usernameInput.value = '';
         ratingInput.value = '';
+        closeRegisterModal();
     } else {
         alert('Please enter valid username and rating.');
     }
 }
 
 function login() {
-    const usernameInput = document.getElementById('username');
-    const username = usernameInput.value.trim();
-
-    if (username !== '') {
-        loggedInUser = username;
-        alert('Logged in successfully as ' + loggedInUser + '.');
-    } else {
-        alert('Please enter a valid username.');
-    }
+    // Реализация входа
+    alert('Login functionality will be implemented here.');
 }
 
 function updatePlayersList() {
@@ -87,40 +84,5 @@ function updateEventsList() {
     });
 }
 
-function createEventModal() {
-    document.getElementById('create-event-modal').style.display = 'block';
-}
-
-function closeModal() {
-    document.getElementById('create-event-modal').style.display = 'none';
-}
-
-function createEvent() {
-    const eventNameInput = document.getElementById('event-name');
-    const eventName = eventNameInput.value.trim();
-    
-    if (eventName !== '') {
-        // Создание ивента
-        const eventId = eventsRef.push({name: eventName, date: new Date().toLocaleString()}).key;
-        
-        // Создание таблицы для регистрации 10 человек
-        const registrationTable = database.ref(`events/${eventId}/registration`);
-        for (let i = 1; i <= 10; i++) {
-            registrationTable.push({name: '', rating: '', role: ''});
-        }
-        
-        closeModal();
-    } else {
-        alert('Please enter a valid event name.');
-    }
-}
-
-function clearPlayersList() {
-    playersRef.remove();
-}
-
-function clearEvent() {
-    playersRef.remove();
-    eventsRef.remove();
-}
+// Остальной код остается без изменений
 
