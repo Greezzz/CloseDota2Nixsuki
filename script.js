@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const kickBtn = document.getElementById('kick-btn');
     const clearBtn = document.getElementById('clear-btn');
 
+    let playerCount = 0; // Добавляем счетчик игроков
+
     registrationForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const username = document.getElementById('username').value;
         const rating = document.getElementById('rating').value;
         const role = document.getElementById('role').value;
+
+        if (playerCount >= 10) { // Проверяем количество игроков
+            alert('Maximum number of players reached.');
+            return;
+        }
 
         const newRow = playersTable.insertRow();
         const cell1 = newRow.insertCell(0);
@@ -19,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         cell1.textContent = username;
         cell2.textContent = role;
         cell3.textContent = rating;
-
+        
+        playerCount++; // Увеличиваем счетчик игроков
         clearForm();
     });
 
@@ -30,11 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Отсортировать игроков по их рейтингу и роли
+        // Логика деления игроков на команды
 
-        // Разделить игроков на 2 команды
-
-        // Вывести составленные команды
+        // Очистка таблицы игроков
+        playersTable.innerHTML = '<thead><tr><th>Username</th><th>Role</th><th>Rating</th></tr></thead>';
+        playerCount = 0; // Сбрасываем счетчик игроков
     });
 
     kickBtn.addEventListener('click', function() {
@@ -43,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     clearBtn.addEventListener('click', function() {
         playersTable.innerHTML = '<thead><tr><th>Username</th><th>Role</th><th>Rating</th></tr></thead>';
+        playerCount = 0; // Сбрасываем счетчик игроков
     });
 
     function clearForm() {
@@ -51,4 +60,5 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('role').value = '';
     }
 });
+
 
