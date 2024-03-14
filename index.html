@@ -14,70 +14,32 @@
     <main>
         <div class="container">
             <h2>Registration</h2>
-            <button onclick="openRegisterModal()">Register</button>
-            <button onclick="login()">Login</button>
-        </div>
-
-        <div class="container">
-            <h2>Players List</h2>
-            <table id="players-table">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Rating</th>
-                    </tr>
-                </thead>
-                <tbody id="players-list"></tbody>
-            </table>
-            <button onclick="clearPlayersList()">Clear Players List</button>
-        </div>
-
-        <div class="container">
-            <h2>Events List</h2>
-            <table id="events-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="events-list"></tbody>
-            </table>
-            <button onclick="createEventModal()">Create Event</button>
-        </div>
-    </main>
-
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeRegisterModal()">&times;</span>
-            <h2>Registration</h2>
             <label for="username">Username:</label>
             <input type="text" id="username" placeholder="Enter your username">
             <br>
-            <label for="rating">Dota Rating:</label>
-            <input type="text" id="rating" placeholder="Enter your Dota rating">
+            <label for="rating">Dota 2 Rating:</label>
+            <input type="text" id="rating" placeholder="Enter your Dota 2 rating">
             <br>
-            <button onclick="registerUser()">Register</button>
+            <button onclick="register()">Register</button>
         </div>
-    </div>
 
-    <div id="create-event-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCreateEventModal()">&times;</span>
+        <div class="container">
+            <h2>Online Users</h2>
+            <ul id="online-users"></ul>
+        </div>
+
+        <div class="container">
             <h2>Create Event</h2>
             <label for="event-name">Event Name:</label>
             <input type="text" id="event-name" placeholder="Enter event name">
             <br>
             <button onclick="createEvent()">Create Event</button>
         </div>
-    </div>
+    </main>
 
-    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
 
 
 
