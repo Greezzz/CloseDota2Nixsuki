@@ -1,29 +1,39 @@
-const socket = io(); // Подключение к серверу с помощью socket.io
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
 
-function register() {
-    const username = document.getElementById('username').value;
-    const rating = document.getElementById('rating').value;
-    
-    // Отправка данных на сервер для регистрации
-    socket.emit('register', { username, rating });
-}
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
-function createEvent() {
-    const eventName = document.getElementById('event-name').value;
-    
-    // Отправка данных на сервер для создания ивента
-    socket.emit('createEvent', { eventName });
-}
+// Массив для хранения данных
+let users = [];
 
-// Обновление списка онлайн пользователей
-socket.on('updateOnlineUsers', onlineUsers => {
-    const onlineUsersList = document.getElementById('online-users');
-    onlineUsersList.innerHTML = '';
+// Middleware для обработки POST запросов
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Обработчик регистрации пользователей
+app.post('/register', (req, res) => {
+    const { username, rating } = req.body;
     
-    onlineUsers.forEach(user => {
-        const listItem = document.createElement('li');
-        listItem.textContent = user.username;
-        onlineUsersList.appendChild(listItem);
-    });
+    // Добавление пользователя в массив
+    users.push({ username, rating });
+    
+    // Отправка обновленного списка онлайн пользователей всем клиентам
+    io.emit('updateOnlineUsers', users);
+    
+    res.status(200).send('User registered successfully');
 });
 
+// Подключение к сокету при запуске сервера
+io.on('connection', socket => {
+    // Отправка обновленного списка онлайн пользователей новому клиенту
+    socket.emit('updateOnlineUsers', users);
+});
+
+// Прослушивание порта
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
