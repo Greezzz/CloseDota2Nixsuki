@@ -87,16 +87,25 @@ function updateEventsList() {
     });
 }
 
-function createEvent() {
-    if (!loggedInUser) {
-        alert('Please login to create an event.');
-        return;
-    }
+function createEventModal() {
+    document.getElementById('create-event-modal').style.display = 'block';
+}
 
-    const eventName = prompt('Enter event name:');
-    if (eventName) {
-        const eventDate = new Date().toLocaleString();
-        eventsRef.push({name: eventName, date: eventDate});
+function closeModal() {
+    document.getElementById('create-event-modal').style.display = 'none';
+}
+
+function createEvent() {
+    const eventNameInput = document.getElementById('event-name');
+    const eventName = eventNameInput.value.trim();
+    
+    if (eventName !== '') {
+        // Здесь вы можете добавить логику создания клоза с балансировкой команд и выбором роли
+        // Для примера, добавим событие в базу данных
+        eventsRef.push({name: eventName, date: new Date().toLocaleString()});
+        closeModal();
+    } else {
+        alert('Please enter a valid event name.');
     }
 }
 
