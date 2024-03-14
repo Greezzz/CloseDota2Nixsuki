@@ -1,37 +1,54 @@
-require('dotenv').config();
-const express = require('express');
-const { GPT } = require('@openai/gpt-3.5');
+document.addEventListener('DOMContentLoaded', function() {
+    const registrationForm = document.getElementById('registration-form');
+    const playersTable = document.getElementById('players-table');
+    const playersList = document.getElementById('players-list');
+    const startEventBtn = document.getElementById('start-event-btn');
+    const kickBtn = document.getElementById('kick-btn');
+    const clearBtn = document.getElementById('clear-btn');
 
-const app = express();
-const port = process.env.PORT || 3000;
-const apiKey = process.env.OPENAI_API_KEY;
+    registrationForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const rating = document.getElementById('rating').value;
+        const role = document.getElementById('role').value;
 
-const gpt = new GPT({
-  apiKey,
-  engine: 'davinci', // Используйте модель Davinci для лучших результатов
-  timeout: 60 * 1000, // Таймаут запроса (в миллисекундах)
-});
+        const newRow = playersTable.insertRow();
+        const cell1 = newRow.insertCell(0);
+        const cell2 = newRow.insertCell(1);
+        const cell3 = newRow.insertCell(2);
+        cell1.textContent = username;
+        cell2.textContent = role;
+        cell3.textContent = rating;
 
-app.use(express.json());
-
-app.post('/ask', async (req, res) => {
-  const { message } = req.body;
-
-  try {
-    const response = await gpt.send({
-      prompt: message,
-      maxTokens: 100, // Максимальное количество токенов в ответе
-      temperature: 0.7, // Параметр температуры для генерации ответа
+        clearForm();
     });
 
-    res.json({ response: response.choices[0].text.trim() });
-  } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+    startEventBtn.addEventListener('click', function() {
+        const players = Array.from(playersTable.rows).slice(1);
+        if (players.length !== 10) {
+            alert('The event must have exactly 10 players.');
+            return;
+        }
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+        // Отсортировать игроков по их рейтингу и роли
+
+        // Разделить игроков на 2 команды
+
+        // Вывести составленные команды
+    });
+
+    kickBtn.addEventListener('click', function() {
+        // Логика для кика игрока из таблицы
+    });
+
+    clearBtn.addEventListener('click', function() {
+        playersTable.innerHTML = '<thead><tr><th>Username</th><th>Role</th><th>Rating</th></tr></thead>';
+    });
+
+    function clearForm() {
+        document.getElementById('username').value = '';
+        document.getElementById('rating').value = '';
+        document.getElementById('role').value = '';
+    }
 });
 
