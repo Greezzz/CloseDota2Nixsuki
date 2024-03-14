@@ -3,75 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with GPT</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .chat-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-            height: 300px;
-            overflow-y: scroll;
-        }
-        .message {
-            margin-bottom: 10px;
-        }
-        input[type="text"] {
-            width: 70%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Dota 2 Event Registration</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Chat with GPT</h1>
-        <div class="chat-box" id="chat-box"></div>
-        <input type="text" id="user-input" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
+        <h1>Dota 2 Event Registration</h1>
+        <form id="registration-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <br>
+            <label for="rating">Dota Rating:</label>
+            <input type="number" id="rating" required>
+            <br>
+            <label for="role">Role:</label>
+            <select id="role" required>
+                <option value="">Select role</option>
+                <option value="carry">Carry</option>
+                <option value="mid">Mid</option>
+                <option value="offlane">Offlane</option>
+                <option value="support">Support</option>
+                <option value="full-support">Full Support</option>
+            </select>
+            <br>
+            <button type="submit">Register</button>
+        </form>
+        <hr>
+        <h2>Event</h2>
+        <button id="start-event-btn">Start Event</button>
+        <button id="kick-btn">Kick Player</button>
+        <button id="clear-btn">Clear Event</button>
+        <table id="players-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody id="players-list"></tbody>
+        </table>
     </div>
 
-    <script>
-        function sendMessage() {
-            var userInput = document.getElementById('user-input').value;
-            var chatBox = document.getElementById('chat-box');
-            var userMessage = document.createElement('div');
-            userMessage.classList.add('message');
-            userMessage.innerHTML = '<strong>You:</strong> ' + userInput;
-            chatBox.appendChild(userMessage);
-            
-            // Эмуляция ответа от ChatGPT (в реальном проекте это будет отправка запроса на сервер)
-            var botResponse = 'Это ответ от ChatGPT на ваше сообщение: ' + userInput;
-            var botMessage = document.createElement('div');
-            botMessage.classList.add('message');
-            botMessage.innerHTML = '<strong>ChatGPT:</strong> ' + botResponse;
-            chatBox.appendChild(botMessage);
-            
-            // Прокрутка вниз, чтобы показать новые сообщения
-            chatBox.scrollTop = chatBox.scrollHeight;
-            
-            // Очистка поля ввода
-            document.getElementById('user-input').value = '';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
 
