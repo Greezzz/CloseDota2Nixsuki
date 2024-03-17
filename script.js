@@ -16,7 +16,7 @@ function sendMessage() {
 
   // Replace 'your-api-key' with your OpenAI API key
   const gpt = new OpenAI.ChatCompletion({
-    apiKey: '8cLsPsn308YKX4hv4dGrT3BlbkFJqhX5glk3p2XBVpPMkTwt'
+    apiKey: 'KLG5KtpW6r4RO0aRzbkWT3BlbkFJ3n1kKJzGFNMl8OLeNrWU'
   });
   
   gpt.createChat({ messages: [{ role: 'user', content: userMessage }] })
