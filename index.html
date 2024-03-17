@@ -3,29 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Орел или Решка Казино</title>
+<title>ChatGPT Demo</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <h1>Орел или Решка Казино</h1>
-    <div class="game">
-        <label for="bet">Ставка:</label>
-        <input type="number" id="bet" min="1" value="1">
-        <br>
-        <label for="choice">Выберите:</label>
-        <select id="choice">
-            <option value="heads">Орел</option>
-            <option value="tails">Решка</option>
-        </select>
-        <br>
-        <button onclick="play()">Играть</button>
-        <p id="result"></p>
-    </div>
+<div class="chat-container">
+  <div class="chat-box" id="chat-box"></div>
+  <input type="text" id="user-input" placeholder="Type a message...">
+  <button onclick="sendMessage()">Send</button>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@openai/chat-gpt"></script>
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
